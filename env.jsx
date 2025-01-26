@@ -1,0 +1,1 @@
+export const ipAdrees = "192.168.1.118"

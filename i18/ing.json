@@ -1,0 +1,58 @@
+{
+    "welcome": "Welcome",
+    "pastActions": "Past Actions",
+    
+    "send": {
+    "description": "The information provided by Historical AI may not be accurate. Please verify the information from trusted sources.", 
+    "person": "His. figure",
+    "event": "His. event",
+    "ask": "Chat",
+    "plus": "Upgrade  "
+  },
+  "authPage": {
+    "email": "Email",
+    "pass": "Password",
+    "forget": "Forgot Password",
+    "login": "Log In",
+    "singin": "Don't have an account? Create one now.",
+    "userName": "Username",
+    "registar": "Sign Up",
+    "send": "Send"
+  },
+  "settingPage": {
+    "settings": "Settings",
+    "lang": "English",
+    "about": "About",
+    "logouth": "Log Out"
+  },
+  "event": {
+    "info": "To start, write a historical event.",
+    "plasholder": "What would you like to know?"
+  },
+  "person": {
+    "info": "To start, write the name of a historical figure.",
+    "plasholder": "What would you like to know?"
+  },
+  "langs": {
+    "ar": "Arabic",
+    "tr": "Turkish",
+    "en": "English"
+  },
+    "textGen": {
+      "short": "Short",
+      "medium": "Medium",
+      "long": "Long",
+      "expression": "Expression",
+      "expression_params": {
+        "basic": "Basic",
+        "understandable": "Understandable",
+        "scientific": "Scientific"
+      },
+      "style": "Style",
+      "style_params": {
+        "realistic": "Realistic",
+        "epic": "Epic"
+      },
+      "create": "Create"
+    }
+  }
