@@ -20,7 +20,7 @@ import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useRouter } from "expo-router";
 
-//import * as Google from "expo-auth-session/providers/google";
+import * as Google from "expo-auth-session/providers/google";
 
 import { useTranslation } from 'react-i18next';
 //import {GoogleSignin, statusCodes} from '@react-native-google-signin/google-signin';
@@ -35,22 +35,22 @@ const Login = ({ navigation }) => {
 
 
 
-  // const CLIENT_ID = '852463126953-vepaukb62ut1ukauklepcpqgs8ao8n0k.apps.googleusercontent.com'; // Buraya Google Developer Console'dan aldığınız client ID'yi girin.
-  // const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-  //   clientId: CLIENT_ID,
-  //   redirectUri: "https://auth.expo.io/@dev.hzm/com.dev.Historical_Mobile"
+  const CLIENT_ID = '852463126953-vepaukb62ut1ukauklepcpqgs8ao8n0k.apps.googleusercontent.com'; // Buraya Google Developer Console'dan aldığınız client ID'yi girin.
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: CLIENT_ID,
+    redirectUri: "https://auth.expo.io/@dev.hzm/His-Mobile"
 
-  // });
+  });
 
 
-  // useEffect(() => {
-  //   if (response?.type === "success") {
-  //     const { id_token } = response.params;
-  //     console.log("Google Auth Success:", id_token);
-  //   } else if (response?.type === "error") {
-  //     console.error("Google Auth Error:", response.error);
-  //   }
-  // }, [response]);
+  useEffect(() => {
+    if (response?.type === "success") {
+      const { id_token } = response.params;
+      console.log("Google Auth Success:", id_token);
+    } else if (response?.type === "error") {
+      console.error("Google Auth Error:", response.error);
+    }
+  }, [response]);
 
 
   // useEffect(() => {
@@ -211,7 +211,7 @@ const Login = ({ navigation }) => {
             <AntDesign  name="google" size={34} color="black" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("Registar")}>
+        <TouchableOpacity onPress={() => router.push("./registar")}>
           <Text style={styles.signupText}>
           {t("authPage.singin")}
           </Text>
@@ -259,7 +259,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.inputBorder,
     paddingLeft: 18,
-    paddingRight:18
+    paddingRight:18,
+    height:50
   },
   input: {
     marginLeft: 12,

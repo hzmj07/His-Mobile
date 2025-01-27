@@ -18,12 +18,15 @@ import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTranslation } from 'react-i18next';
+import { useRouter } from "expo-router";
 
 const ChatScreen = ({ navigation }) => {
   const { token } = useContext(UserContext);
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState();
   const [showChat, setshowChat] = useState(false);
+  const router = useRouter(); // useRouter hook'u, navigasyon işlemleri için kullanılır
+  
   const { t } = useTranslation();
   // Mesaj ekleme fonksiyonu
   const sendMessage = async () => {
@@ -170,7 +173,7 @@ const ChatScreen = ({ navigation }) => {
         }}
       >
         <MaterialIcons
-          onPress={() => navigation.goBack()}
+         onPress={() => router.back()}
           name="arrow-back-ios-new"
           size={25}
           color="black"

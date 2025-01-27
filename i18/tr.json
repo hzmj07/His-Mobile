@@ -1,58 +1,57 @@
 {
-    "welcome": "Hoş geldiniz!!",
-    "pastActions":"Geçmiş",
+  "welcome": "Hoş geldiniz!!",
+  "pastActions":"Geçmiş",
 
-    "send" : {
-      "description": "Historical AI'nın verdiği bilgiler doğru olmayabilir. Bilgileri güvendiğiniz kaynaklardan teyit ediniz.", 
-      "person" : "Tarihi kişilik",
-      "event" : "Tarihi olay",
-      "ask" : "Soru-Cevap",
-      "plus" : "Yükselt"
+  "send" : {
+    "description": "Historical AI'nın verdiği bilgiler doğru olmayabilir. Bilgileri güvendiğiniz kaynaklardan teyit ediniz.", 
+    "person" : "Tarihi kişilik",
+    "event" : "Tarihi olay",
+    "ask" : "Soru-Cevap",
+    "plus" : "Yükselt"
+  },
+  "authPage" : {
+    "email" :"Email",
+    "pass" : "Şifre",
+    "forget" : "Şifremi Unuttum",
+    "login" : "Giriş Yap",
+    "singin" : "Hesabın yoksa Hemen oluştur.",
+    "userName" : "Kullanıcı Adı",
+    "registar" : "Kayıt Ol",
+    "send" : "Gönder"
+  },
+  "settingPage":{
+    "settings" : "Ayarlar",
+    "lang" : "Türkçe",
+    "about": "Hakkında", 
+    "logouth" :"Log out"
+  },
+  "event":{
+    "info":"Başlamak için tarihi bir olayı yazınız.",
+    "plasholder" : "Neyi bilmek istersiniz ?"
+  },
+  "person":{
+    "info":"Başlamak için tarihi bir kişiliğin adını yazınız.",
+    "plasholder" : "Neyi bilmek istersiniz ?"
+  },
+  "langs":{
+    "ar":"Arapça",
+    "tr" :"Türkçe",
+    "en" : "İngilizce"
+  },
+  "textGen" : {
+    "short" : "Kısa" ,
+    "medium" : "Orta" , 
+    "long"  : "Uzun" , 
+    "expression" : "Anlatım" , 
+    "expression_params" : {
+      "basic" : "Basit",
+      "understandable" : "Anlaşılır",
+      "scientific" : "Bilimsel" },
+    "style" : "Üslub",
+    "style_params":{
+      "realistic" : "Gerçekçi" ,
+      "epic"  :"Destan"
     },
-    "authPage" : {
-      "email" :"Email",
-      "pass" : "Şifre",
-      "forget" : "Şifremi Unuttum",
-      "login" : "Giriş Yap",
-      "singin" : "Hesabın yoksa Hemen oluştur.",
-      "userName" : "Kullanıcı Adı",
-      "registar" : "Kayıt Ol",
-      "send" : "Gönder"
-    },
-    "settingPage":{
-      "settings" : "Ayarlar",
-      "lang" : "Türkçe",
-      "about": "Hakkında", 
-      "logouth" :"Log out"
-    },
-    "event":{
-      "info":"Başlamak için tarihi bir olayı yazınız.",
-      "plasholder" : "Neyi bilmek istersiniz ?"
-    },
-    "person":{
-      "info":"Başlamak için tarihi bir kişiliğin adını yazınız.",
-      "plasholder" : "Neyi bilmek istersiniz ?"
-    },
-    "langs":{
-      "ar":"Arapça",
-      "tr" :"Türkçe",
-      "en" : "İngilizce"
-    },
-    "textGen" : {
-      "short" : "Kısa" ,
-      "medium" : "Orta" , 
-      "long"  : "Uzun" , 
-      "expression" : "Anlatım" , 
-      "expression_params" : {
-        "basic" : "Basit",
-        "understandable" : "Anlaşılır",
-        "scientific" : "Bilimsel" },
-      "style" : "Üslub",
-      "style_params":{
-        "realistic" : "Gerçekçi" ,
-        "epic"  :"Destan"
-      },
-      "lang" : "Dil" ,
-      "create"  :"Oluştur"}
-  }
-  
+    "lang" : "Dil" ,
+    "create"  :"Oluştur"}
+}

@@ -135,7 +135,7 @@ const Send = ({ navigation }) => {
               </TouchableOpacity>
             </View>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Ask")}
+              onPress={() => router.push("/askQues")}
               style={styles.buton}
             >
               <MaterialCommunityIcons
