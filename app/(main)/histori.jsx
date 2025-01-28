@@ -11,8 +11,8 @@ import colors from "../../color";
 import { get_actions } from "../../api/user";
 import { UserContext } from "../../context/context";
 import Loading from "../../components/loading";
-import { useTranslation } from 'react-i18next';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useTranslation } from "react-i18next";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useRouter } from "expo-router";
 
 const Login = ({ navigation }) => {
@@ -21,15 +21,14 @@ const Login = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useContext(UserContext);
   const { t } = useTranslation();
-      const { language } = useContext(UserContext);
-      const router = useRouter(); // useRouter hook'u, navigasyon işlemleri için kullanılır
-
+  const { language } = useContext(UserContext);
+  const router = useRouter(); // useRouter hook'u, navigasyon işlemleri için kullanılır
 
   const getData = async () => {
     try {
-      const fetchedData = await get_actions(user._id)
+      const fetchedData = await get_actions(user._id);
       console.log(fetchedData);
-      
+
       setData(fetchedData);
     } catch (error) {
       setData([]); // Veri yüklenmezse boş bir array atanır
@@ -42,8 +41,6 @@ const Login = ({ navigation }) => {
     getData();
   }, []);
 
-
-
   const renderMessageText = (text) => {
     console.log(text);
     const sections = text.split(/(\*\*.*?\*\*|https?:\/\/[^\s]+)/g);
@@ -54,17 +51,19 @@ const Login = ({ navigation }) => {
         const title = section.slice(2, -2);
         return (
           <Text key={index} style={{ fontWeight: "bold" }}>
-          {title}{"\n"}{"\n"}
-        </Text>
+            {title}
+            {"\n"}
+            {"\n"}
+          </Text>
         );
-      }else if (section.startsWith("*") && section.endsWith("*")) {
+      } else if (section.startsWith("*") && section.endsWith("*")) {
         const title = section.slice(2, -2);
         return (
           <Text key={index} style={{ fontWeight: "bold" }}>
-          {title}
-        </Text>
+            {title}
+          </Text>
         );
-      }else if (section.startsWith("http")) {
+      } else if (section.startsWith("http")) {
         console.log(section);
 
         const url = new URL(section);
@@ -103,7 +102,7 @@ const Login = ({ navigation }) => {
           }}
         >
           <MaterialIcons
-             onPress={() => router.back()}
+            onPress={() => router.back()}
             name="arrow-back-ios-new"
             size={25}
             color="black"
@@ -120,7 +119,7 @@ const Login = ({ navigation }) => {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-{[...data].reverse().map((item, index) => (
+          {[...data].reverse().map((item, index) => (
             <View
               key={index}
               style={[
@@ -128,7 +127,13 @@ const Login = ({ navigation }) => {
                 expandedIndex === index && styles.expandedElement,
               ]}
             >
-              <View style={{ flexDirection: "row", alignItems: "center" , justifyContent:"flex-start" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                }}
+              >
                 <TouchableOpacity onPress={() => toggleExpand(index)}>
                   <MaterialIcons
                     name={
@@ -140,14 +145,28 @@ const Login = ({ navigation }) => {
                     color="black"
                   />
                 </TouchableOpacity>
-                <Text style={styles.Elementtext}>{item.req.substring(0, 30)}</Text>
+                <Text style={styles.Elementtext}>
+                  {item.req.substring(0, 30)}
+                </Text>
               </View>
               {expandedIndex === index && (
-                <View  >
-                <View style={styles.expandedContent}>
-                  <Text style={styles.expandedText}>{renderMessageText( item.res.substring(0, 150))}</Text>
-                </View>
-                <Text onPress={()=> navigation.navigate("Text" , { data: item.res })} style={{fontSize:16 , textAlign:"right" , marginTop:7 }} >Daha fazla görüntüle</Text>
+                <View>
+                  <View style={styles.expandedContent}>
+                    <Text style={styles.expandedText}>
+                      {renderMessageText(item.res.substring(0, 150))}
+                    </Text>
+                  </View>
+                  <Text
+                    onPress={() =>
+                      router.push({
+                        pathname: "/text",
+                        params: { data: item.res }, // Parametre gönder
+                      })
+                    }
+                    style={{ fontSize: 16, textAlign: "right", marginTop: 7 }}
+                  >
+                    Daha fazla görüntüle
+                  </Text>
                 </View>
               )}
             </View>
@@ -198,13 +217,13 @@ const styles = StyleSheet.create({
     height: 60,
     borderColor: colors.inputBorder,
     overflow: "hidden",
-    paddingLeft:20,
-    paddingRight:20
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   expandedElement: {
     height: "auto",
-    paddingTop:20,
-    paddingBottom:9
+    paddingTop: 20,
+    paddingBottom: 9,
   },
   Elementtext: {
     fontSize: 18,
