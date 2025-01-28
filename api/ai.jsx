@@ -1,5 +1,7 @@
 import axios from "axios";
-import {ipAdrees} from "../env"
+import {ipAdrees} from "../env";
+import * as FileSystem from "expo-file-system";
+
 export const generateText = async (length, mesaj,expression, style, token , tur , lang) => {
   console.log("isloading");
   console.log(token);
@@ -38,25 +40,54 @@ export const generateText = async (length, mesaj,expression, style, token , tur 
 };
 
 
-export const chatWithHistorical = async(mesaj , token) =>{
-  console.log("loading...");
+
+export const chatWithHistorical = async(mesaj , token , file) =>{
+  console.log("contorlllll");
   
+  const formData = new FormData();
+
+  // Mesajı ekle (eğer varsa)
+  if (mesaj) {
+    formData.append('message', mesaj);
+  }
+
+  // Dosyayı ekle (eğer varsa)
+  if (file) {
+    const fileData = file.assets[0];
+    console.log( "ermiş dosya (tasavvuf değil)" ,  fileData);
+    
+    try {
+      const base64File = await FileSystem.readAsStringAsync(fileData.uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+      if (base64File) {
+        formData.append('file', {
+          uri: fileData.uri,
+          name: fileData.name,
+          type: fileData.mimeType,
+          buffer: base64File,
+        });
+      }
+    } catch (error) {
+      console.log("File read error:", error);
+    }
+  }
+
   try {
     const response = await axios.post(
       `http://${ipAdrees}:5055/ai/chat_with_ai`,
-      {"message":mesaj },
+      formData,
       {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // JWT token
+          'Content-Type': 'multipart/form-data', // Form-data için gerekli
         },
       }
     );
 
-    console.log("ai dosyasındaki veridir" ,  response.data);
-    return  response.data ;
+    return response.data; // API'den gelen yanıt
   } catch (error) {
-    console.error(error);
-    
+    console.error('Error:', error);
+    throw error; // Hata durumunda hatayı fırlat
   }
 }

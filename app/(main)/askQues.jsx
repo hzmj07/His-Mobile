@@ -19,23 +19,46 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTranslation } from 'react-i18next';
 import { useRouter } from "expo-router";
+import * as DocumentPicker from 'expo-document-picker';
 
 const ChatScreen = ({ navigation }) => {
   const { token } = useContext(UserContext);
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState();
   const [showChat, setshowChat] = useState(false);
+  const [File, setFile] = useState(null)
   const router = useRouter(); // useRouter hook'u, navigasyon işlemleri için kullanılır
   
   const { t } = useTranslation();
   // Mesaj ekleme fonksiyonu
-  const sendMessage = async () => {
-    setInputText("");
 
+
+
+  const pickDocument = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: '*/*', // Tüm dosya türlerine izin verir
+      });
+      console.log(result);
+      
+      if (result.canceled === false) {
+        setFile(result);
+        console.log('Seçilen dosya:', result);
+      } else {
+        console.log('Dosya seçme iptal edildi.');
+      }
+    } catch (error) {
+      console.error('Dosya seçme hatası:', error);
+    }
+  };
+  const sendMessage = async () => {
+    setFile(null);
+    setInputText("");
+    
     if (inputText.trim()) {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { id: Date.now().toString(), text: inputText, sender: "user" },
+        { id: Date.now().toString(), text: inputText, sender: "user" , file : File && File.assets[0].name  },
       ]);
 
       const placeholderMessage = {
@@ -47,7 +70,7 @@ const ChatScreen = ({ navigation }) => {
       setMessages((prevMessages) => [...prevMessages, placeholderMessage]);
 
       try {
-        const data = await chatWithHistorical(inputText, token.accessToken);
+        const data = await chatWithHistorical(inputText, token.accessToken , File);
         console.log("elimizsdeki data", data);
 
         setMessages((prevMessages) =>
@@ -59,6 +82,13 @@ const ChatScreen = ({ navigation }) => {
         );
       } catch (error) {
         console.error(`dataa`, error);
+        setMessages((prevMessages) =>
+          prevMessages.map((msg) =>
+            msg.id === placeholderMessage.id
+              ? { ...msg, text:"Error", loading: false }
+              : msg
+          )
+        );
       }
     }
   };
@@ -127,19 +157,24 @@ const ChatScreen = ({ navigation }) => {
 
   // Mesajları render eden fonksiyon
   const renderItem = ({ item }) => {
+    console.log(item);
+    
     if (item.loading) {
       return (
         <View
-          style={[
-            styles.messageContainer,
-            item.sender === "user" ? styles.userMessage : styles.otherMessage,
-          ]}
-        ><ActivityIndicator />
-        </View>
+        style={[
+          styles.messageContainer,
+          item.sender === "user" ? styles.userMessage : styles.otherMessage,
+        ]}
+      ><ActivityIndicator />
+      </View>
       );
     }
 
+   
     return (
+      <>
+      
       <TouchableOpacity
         onLongPress={() => {
           console.log("logPress");
@@ -159,6 +194,18 @@ const ChatScreen = ({ navigation }) => {
           {renderMessageText(item.text.trim())}
         </Text>
       </TouchableOpacity>
+      {item.file && <View
+        style={[
+          styles.messageContainer,
+          item.sender === "user" ? styles.userMessage : styles.otherMessage,
+          {backgroundColor:null,
+            borderWidth:0.8,
+            borderRadius:12
+           }
+        ]}
+      ><Text style={styles.messageText} >📄    {item.file.slice(0,20)}</Text>
+      </View>}
+      </>
     );
   };
 
@@ -228,8 +275,11 @@ const ChatScreen = ({ navigation }) => {
           justifyContent: "center",
         }}
       >
+      
         <View style={styles.inputContainer}>
-          <Ionicons name="document-attach-outline" size={29} color="black" />
+        {File && <View style={{height:40 , width:"100%"  , alignItems:"center" , flexDirection:"row" , paddingRight:10 , paddingLeft:10}} ><Text style={{fontSize:16 ,flex:1}} >📄   {File.assets[0].name.slice(0,15)}</Text><MaterialIcons onPress={()=>{setFile(null)}} name="cancel" size={26} color="black" /></View>}
+        <View style={{ flexDirection: "row", justifyContent: "center" , alignItems:"center"}} >
+         {!File && <Ionicons onPress={()=>{pickDocument()}} name="document-attach-outline" size={29} color="black" /> }
           <TextInput
             style={styles.input}
             placeholder="Ask me..."
@@ -244,6 +294,7 @@ const ChatScreen = ({ navigation }) => {
           >
             <Feather name="send" size={18} color="white" />
           </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -276,7 +327,6 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   inputContainer: {
-    flexDirection: "row",
     borderColor: "#ddd",
    
     borderRadius: 16,
