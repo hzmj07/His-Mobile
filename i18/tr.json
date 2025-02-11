@@ -53,5 +53,9 @@
       "epic"  :"Destan"
     },
     "lang" : "Dil" ,
-    "create"  :"Oluştur"}
+    "create"  :"Oluştur"},
+    "chat":{
+    "now" : "Tarihte Bugün",
+    "ask" : "Bana sor..."
+  }
 }

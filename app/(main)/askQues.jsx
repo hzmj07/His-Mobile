@@ -96,7 +96,7 @@ const ChatScreen = ({ navigation }) => {
   const buttonsData = [
     {
       id: "3",
-      text: "Tarihte Bugün",
+      text: t("chat.now"),
       icon: (
         <MaterialCommunityIcons
           name="chat-question-outline"
@@ -282,7 +282,7 @@ const ChatScreen = ({ navigation }) => {
          {!File && <Ionicons onPress={()=>{pickDocument()}} name="document-attach-outline" size={29} color="black" /> }
           <TextInput
             style={styles.input}
-            placeholder="Ask me..."
+            placeholder={t("chat.ask")}
             value={inputText}
             onChangeText={setInputText}
             multiline

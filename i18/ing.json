@@ -55,5 +55,9 @@
     },
     "lang" : "Language" ,
     "create": "Create"
+  },
+  "chat":{
+    "now" : "Today in History",
+    "ask" : "Ask me..."
   }
 }
