@@ -4,7 +4,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
-1. install Backend    ```bash
+1. install Backend
+    ```bash
    git clone "https://github.com/hzmj07/HistoricalAi-Backend"
    npm install
    node index.js
