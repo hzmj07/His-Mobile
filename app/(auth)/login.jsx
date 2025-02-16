@@ -35,46 +35,8 @@ const Login = ({ navigation }) => {
 
 
 
-  const CLIENT_ID = '852463126953-vepaukb62ut1ukauklepcpqgs8ao8n0k.apps.googleusercontent.com'; // Buraya Google Developer Console'dan aldığınız client ID'yi girin.
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: CLIENT_ID,
-    redirectUri: "https://auth.expo.io/@dev.hzm/His-Mobile"
-
-  });
 
 
-  useEffect(() => {
-    if (response?.type === "success") {
-      const { id_token } = response.params;
-      console.log("Google Auth Success:", id_token);
-    } else if (response?.type === "error") {
-      console.error("Google Auth Error:", response.error);
-    }
-  }, [response]);
-
-
-  // useEffect(() => {
-  //   GoogleSignin.configure({
-  //     webClientId: '852463126953-oia8t7kv697p9pler7fdr5ug131vj51u.apps.googleusercontent.com',
-  //     offlineAccess: true,
-  //   });
-  // }, []);
-
-  // const signIn = async () => {
-  //   try {
-  //     await GoogleSignin.hasPlayServices();
-  //     const userInfo = await GoogleSignin.signIn();
-  //     console.log(userInfo);
-  //   } catch (error) {
-  //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-  //       console.log('Sign-In cancelled');
-  //     } else if (error.code === statusCodes.IN_PROGRESS) {
-  //       console.log('Sign-In in progress');
-  //     } else {
-  //       console.error(error);
-  //     }
-  //   }
-  // };
 
 
   const validationSchema = Yup.object().shape({
@@ -204,12 +166,7 @@ const Login = ({ navigation }) => {
               </>
             )}
           </Formik>
-        <TouchableOpacity
-          onPress={() => promptAsync()}
-          style={styles.googleAuthButton}
-          >
-            <AntDesign  name="google" size={34} color="black" />
-          </TouchableOpacity>
+       
         </View>
         <TouchableOpacity onPress={() => router.push("./registar")}>
           <Text style={styles.signupText}>
